@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 // здесь мы будем ждать сообщения из другого потока
-                tv.setText("N: "+msg.getData().getInt("key"));
+                int n = msg.getData().getInt("key");
+                tv.setText("N: "+n);
+                if(n==49) btn.setEnabled(true);
             }
         };
 
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                btn.setEnabled(false);
                new Thread(new Runnable() {
                    @Override
                    public void run() {
